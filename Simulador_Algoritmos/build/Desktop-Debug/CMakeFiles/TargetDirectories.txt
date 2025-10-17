@@ -1,0 +1,9 @@
+/home/estela-carolina/Simulador_Algoritmos/build/Desktop-Debug/CMakeFiles/Simulador_Algoritmos.dir
+/home/estela-carolina/Simulador_Algoritmos/build/Desktop-Debug/CMakeFiles/edit_cache.dir
+/home/estela-carolina/Simulador_Algoritmos/build/Desktop-Debug/CMakeFiles/rebuild_cache.dir
+/home/estela-carolina/Simulador_Algoritmos/build/Desktop-Debug/CMakeFiles/list_install_components.dir
+/home/estela-carolina/Simulador_Algoritmos/build/Desktop-Debug/CMakeFiles/install.dir
+/home/estela-carolina/Simulador_Algoritmos/build/Desktop-Debug/CMakeFiles/install/local.dir
+/home/estela-carolina/Simulador_Algoritmos/build/Desktop-Debug/CMakeFiles/install/strip.dir
+/home/estela-carolina/Simulador_Algoritmos/build/Desktop-Debug/CMakeFiles/Simulador_Algoritmos_autogen_timestamp_deps.dir
+/home/estela-carolina/Simulador_Algoritmos/build/Desktop-Debug/CMakeFiles/Simulador_Algoritmos_autogen.dir

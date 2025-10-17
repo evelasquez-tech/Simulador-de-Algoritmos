@@ -1,0 +1,2 @@
+set(__QT_DEPLOY_TARGET_Simulador_Algoritmos_FILE /home/estela-carolina/Simulador_Algoritmos/build/Desktop-Debug/Simulador_Algoritmos)
+set(__QT_DEPLOY_TARGET_Simulador_Algoritmos_TYPE EXECUTABLE)
