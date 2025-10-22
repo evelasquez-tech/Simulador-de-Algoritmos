@@ -5,6 +5,7 @@
 #include <QTableWidget>
 #include <QString>
 #include <vector>
+#include <QHash>
 
 namespace Ui {
 class VentanaFifo;
@@ -25,8 +26,6 @@ public:
     explicit VentanaFifo(QWidget *parent = nullptr);
     ~VentanaFifo();
 
-
-
 private slots:
     void on_btnAgregar_clicked();
 
@@ -34,12 +33,13 @@ private slots:
 
 private:
     Ui::VentanaFifo *ui;
+    QHash<int, int> rowById_;
 
     std::vector<Proceso> procesos_;
     int nextId_ = 1;
 
     QTableWidgetItem* makeCell(const QString& text, bool center = false);
-    void agregarProcesoTabla(const Proceso& p);
+    void agregarProcesoATabla(const Proceso& p);
 
     int findRowByProcessId(int id) const;
 };

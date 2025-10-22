@@ -1,8 +1,9 @@
 #include "ventanafifo.h"
 #include "ui_ventanafifo.h"
-#include <QDialog>
-#include <QTableWidget>
-#include <QString>
+//#include <QDialog>
+
+//#include <QTableWidget>
+//#include <QString>
 #include <QHeaderView>
 #include<QMessageBox>
 #include<QIntValidator>
@@ -11,28 +12,32 @@
 #include <algorithm>
 
 
-
+//Constructor
 VentanaFifo::VentanaFifo(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::VentanaFifo)
 {
     ui->setupUi(this);
+    setWindowTitle("Simulador FIFO");
     //Tabla de procesos
+
 
     ui->tblProcesos->setColumnCount(4);
     ui->tblProcesos->setHorizontalHeaderLabels(
         {"#Proceso", "Ráfaga CPU","Tiempo de Llegada", "Estado"});
 
-    ui->tblProcesos->setAlternatingRowColors(true);
     ui->tblProcesos->verticalHeader()->setVisible(false);
+    ui->tblProcesos->setAlternatingRowColors(true);
+
     ui->tblProcesos->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tblProcesos->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->tblProcesos->setShowGrid(true);
+    ui->tblProcesos->setSortingEnabled(false);
 
     auto *h1 =ui->tblProcesos->horizontalHeader();
     h1->setDefaultAlignment(Qt::AlignCenter);
     h1->setSectionResizeMode(QHeaderView::Interactive);
-    h1->setStretchLastSection(false);
+    //h1->setStretchLastSection(false);
 
 
     ui->tblProcesos->setColumnWidth(0,100);
@@ -50,16 +55,18 @@ VentanaFifo::VentanaFifo(QWidget *parent)
     ui->tblResultados->setHorizontalHeaderLabels(
         {"#Proceso", "Tiempo de Espera","Tiempo de Sistema"});
 
-    ui->tblResultados->setAlternatingRowColors(true);
     ui->tblResultados->verticalHeader()->setVisible(false);
+    ui->tblResultados->setAlternatingRowColors(true);
+
     ui->tblResultados->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tblResultados->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tblResultados->setSortingEnabled(false);
 
 
     auto *h2 =ui->tblResultados->horizontalHeader();
     h2->setDefaultAlignment(Qt::AlignCenter);
     h2->setSectionResizeMode(QHeaderView::Interactive);
-    h2->setStretchLastSection(false);
+    //h2->setStretchLastSection(false);
 
 
     ui->tblResultados->setColumnWidth(0,140);
@@ -79,6 +86,9 @@ VentanaFifo::VentanaFifo(QWidget *parent)
 
     //connect(ui->btnAgregar, &QPushButton::clicked,
         //   this, &VentanaFifo::on_btnAgregar_clicked);
+
+   // ui->tblProcesos->setSortingEnabled(false);
+    //ui->tblResultados->setSortingEnabled(false);
 }
 
 VentanaFifo::~VentanaFifo()
@@ -86,20 +96,24 @@ VentanaFifo::~VentanaFifo()
     delete ui;
 }
 
+
+//Utilidades
+
 QTableWidgetItem* VentanaFifo::makeCell(const QString &text, bool center)
 {
     auto *it = new QTableWidgetItem(text);
-    Qt::Alignment align;
-    if(center){
-        align=Qt::AlignHCenter | Qt::AlignVCenter;
-    }else{
-        align = Qt::AlignLeft | Qt::AlignVCenter;
-    }
+    Qt::Alignment align = center ? (Qt::AlignHCenter | Qt::AlignVCenter)
+                                 : (Qt::AlignLeft | Qt::AlignVCenter);
+    //if(center){
+       // align=Qt::AlignHCenter | Qt::AlignVCenter;
+    //}else{
+       // align = Qt::AlignLeft | Qt::AlignVCenter;
+   // }
     it->setTextAlignment(align);
 return it;
 }
 
-void VentanaFifo::agregarProcesoTabla(const Proceso &p)
+void VentanaFifo::agregarProcesoATabla(const Proceso &p)
 {
     int r = ui->tblProcesos->rowCount();
     ui->tblProcesos->insertRow(r);
@@ -109,20 +123,23 @@ void VentanaFifo::agregarProcesoTabla(const Proceso &p)
     ui->tblProcesos->setItem(r, 2, makeCell(QString::number(p.llegada), true));
     ui->tblProcesos->setItem(r, 3, makeCell(p.estado));
 
-
+    rowById_[p.id]=r;
 
 }
 
+//Helper de ayuda para busqueda
 int VentanaFifo::findRowByProcessId(int id) const
 {
     const QString needle = QString ("P%1").arg(id);
     for (int r = 0; r < ui->tblProcesos->rowCount(); ++r) {
-        auto *it = ui->tblProcesos->item(r,0);
-        if (it && it->text()==needle) {
+        QTableWidgetItem *it = ui->tblProcesos->item(r,0);
+        //if(!it)continue;
+       // if (it->text().trimmed() ==needle) {
+        if(it && it->text().trimmed()==needle)
             return r;
         }
         return -1;
-    }
+
 }
 
 void VentanaFifo::on_btnAgregar_clicked()
@@ -154,7 +171,7 @@ void VentanaFifo::on_btnAgregar_clicked()
     p.estado = "En cola";
 
     procesos_.push_back(p);
-    agregarProcesoTabla(p);
+    agregarProcesoATabla(p);
 
     ui->txtRafaga->clear();
     ui->txtLlegada->clear();
@@ -181,16 +198,21 @@ void VentanaFifo::on_btnIniciar_clicked()
             return a.id < b.id;
     });
 
+    for(const auto& p:cola){
+        int row = rowById_.value(p.id, -1);
+        if (row>=0) ui->tblProcesos->setItem(row, 3, makeCell("En cola"));
+    }
+
     int tiempo=0;
     long long sumaEspera=0, sumaSistema=0;
 
 
-    //for (const auto& p: cola){
-     //   int row = findRowByProcessId(p.id);
-  //      if(row >= 0) ui->tblProcesos->setItem(row, 3, makeCell("En cola"));
-  //  }
+    for (const auto& p: cola){
+       //int row = findRowByProcessId(p.id);
+       // if(row >= 0) ui->tblProcesos->setItem(row, 3, makeCell("En cola"));
+   // }
 
-    for(const auto& p: cola){
+    //for(const auto& p: cola){
         if(tiempo < p.llegada)
             tiempo = p.llegada;
 
@@ -199,10 +221,11 @@ void VentanaFifo::on_btnIniciar_clicked()
         int fin = inicio + p.rafaga;
         int sistema = fin - p.llegada;
 
-        int rowProc = findRowByProcessId(p.id);
-        if (rowProc >=0){
+        //int rowProc = findRowByProcessId(p.id);
+        int rowProc = rowById_.value(p.id, -1);
+        if (rowProc >=0)
             ui->tblProcesos->setItem(rowProc, 3, makeCell(("Terminado")));
-        }
+
 
         int r = ui->tblResultados-> rowCount();
         ui->tblResultados->insertRow(r);
