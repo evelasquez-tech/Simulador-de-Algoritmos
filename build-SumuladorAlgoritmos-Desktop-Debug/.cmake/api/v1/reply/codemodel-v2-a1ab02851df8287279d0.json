@@ -1,0 +1,78 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "SumuladorAlgoritmos",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "SumuladorAlgoritmos::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SumuladorAlgoritmos-Debug-6e722557409034b5b522.json",
+					"name" : "SumuladorAlgoritmos",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SumuladorAlgoritmos_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SumuladorAlgoritmos_autogen-Debug-a227b85e697b18082273.json",
+					"name" : "SumuladorAlgoritmos_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SumuladorAlgoritmos_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SumuladorAlgoritmos_autogen_timestamp_deps-Debug-66b1446c73d86c0410be.json",
+					"name" : "SumuladorAlgoritmos_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/jorge/Escritorio/Simulador-de-Algoritmos/build-SumuladorAlgoritmos-Desktop-Debug",
+		"source" : "/home/jorge/Escritorio/Simulador-de-Algoritmos/SumuladorAlgoritmos"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}
