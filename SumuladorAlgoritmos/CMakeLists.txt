@@ -12,16 +12,17 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
 
-# Archivos están en ESTA MISMA carpeta (sin prefijo)
+# Traducciones
 set(TS_FILES
     SumuladorAlgoritmos_es_GT.ts
 )
 
+# Fuentes del proyecto
 set(PROJECT_SOURCES
     main.cpp
     mainwindow.cpp
     mainwindow.h
-
+    mainwindow.ui
     planificador.cpp
     planificador.h
     proceso.h
