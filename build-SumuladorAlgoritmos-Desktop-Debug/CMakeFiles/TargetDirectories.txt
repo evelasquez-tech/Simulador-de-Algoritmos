@@ -1,0 +1,5 @@
+/home/jorge/Escritorio/Simulador-de-Algoritmos/build-SumuladorAlgoritmos-Desktop-Debug/CMakeFiles/SumuladorAlgoritmos.dir
+/home/jorge/Escritorio/Simulador-de-Algoritmos/build-SumuladorAlgoritmos-Desktop-Debug/CMakeFiles/edit_cache.dir
+/home/jorge/Escritorio/Simulador-de-Algoritmos/build-SumuladorAlgoritmos-Desktop-Debug/CMakeFiles/rebuild_cache.dir
+/home/jorge/Escritorio/Simulador-de-Algoritmos/build-SumuladorAlgoritmos-Desktop-Debug/CMakeFiles/SumuladorAlgoritmos_autogen_timestamp_deps.dir
+/home/jorge/Escritorio/Simulador-de-Algoritmos/build-SumuladorAlgoritmos-Desktop-Debug/CMakeFiles/SumuladorAlgoritmos_autogen.dir
